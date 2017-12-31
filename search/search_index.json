@@ -27,12 +27,12 @@
         }, 
         {
             "location": "/Debian/", 
-            "text": "Debian\n\n\nTimeZone\n\n\ndpkg-reconfigure tzdata\n - change the timezone", 
+            "text": "Debian\n\n\nTimeZone\nwww\n\n\ndpkg-reconfigure tzdata\n - change the timezone", 
             "title": "Debian"
         }, 
         {
             "location": "/Debian/#debian", 
-            "text": "TimeZone  dpkg-reconfigure tzdata  - change the timezone", 
+            "text": "TimeZone\nwww  dpkg-reconfigure tzdata  - change the timezone", 
             "title": "Debian"
         }
     ]

@@ -27,8 +27,8 @@
         }, 
         {
             "location": "/Debian/", 
-            "text": "Debian 9 (stretch)\n\n\nBased configuration\n\n\nYou can use \nDebian Sources List Generator\n. Modify the data in the /etc/apt/sources.list file by new data.\n\n\napt update \n apt upgrade\n\n\napt install sudo\n\n\nadduser [username] sudo\n\n\napt install firmware-misc-nonfree\n - wi-fi driver\n\n\napt search [package_name])\n - search the needed packages\n\n\ndpkg-reconfigure tzdata\n - change the timezone\n\n\nTroubleshooting\n\n\nIf you get GnuPG errors like:\n\n\n\n\nGPG error: [..] Release: The following signatures couldn\u2019t be verified because the public key is not available: NO_PUBKEY [..]\n\n\n\n\napt update 2\n1 | grep -o '[0-9A-Z]{16}$' | xargs\n - try auto update\n\n\negrep -v '^#|^$' /etc/apt/sources.list{,.d/*.list}\n - try to find bad repo and do rm manually\n\n\ngpg --keyserver subkeys.pgp.net --recv KEY\n \ngpg --export --armor KEY | sudo apt-key add\n - add the key manually", 
-            "title": "Debian 9 (stretch)"
+            "text": "Debian 9 (stretch)\n\n\nBased configuration\n\n\nYou can use \nDebian Sources List Generator\n. Modify the data in the /etc/apt/sources.list file by new data.\n\n\napt update \n apt upgrade\n\n\napt install sudo\n\n\nadduser [username] sudo\n or \nvisudo\n + \nusername   ALL=(ALL)   ALL\n\n\napt install firmware-misc-nonfree\n - wi-fi driver\n\n\napt search [package_name]\n - search the needed packages\n\n\ndpkg-reconfigure tzdata\n - change the timezone\n\n\nnano /etc/profile\n - set command alias for some commands which are often used\n\n\n# add to the end\nalias ll='ls $LS_OPTIONS -l'\nalias l='ls $LS_OPTIONS -lA'\nalias rm='rm -i'\nalias cp='cp -i'\nalias mv='mv -i'\n\n\n\nsource /etc/profile\n\n\nssh-keygen -t ecdsa\n - key generation\n\n\nTroubleshooting\n\n\nIf you get GnuPG errors like:\n\n\n\n\nGPG error: [..] Release: The following signatures couldn\u2019t be verified because the public key is not available: NO_PUBKEY [..]\n\n\n\n\napt update 2\n1 | grep -o '[0-9A-Z]{16}$' | xargs\n - try auto update\n\n\negrep -v '^#|^$' /etc/apt/sources.list{,.d/*.list}\n - try to find bad repo and do rm manually\n\n\ngpg --keyserver subkeys.pgp.net --recv KEY\n \n\ngpg --export --armor KEY | sudo apt-key add\n - or add the key manually", 
+            "title": "Debian"
         }, 
         {
             "location": "/Debian/#debian-9-stretch", 
@@ -37,12 +37,12 @@
         }, 
         {
             "location": "/Debian/#based-configuration", 
-            "text": "You can use  Debian Sources List Generator . Modify the data in the /etc/apt/sources.list file by new data.  apt update   apt upgrade  apt install sudo  adduser [username] sudo  apt install firmware-misc-nonfree  - wi-fi driver  apt search [package_name])  - search the needed packages  dpkg-reconfigure tzdata  - change the timezone", 
+            "text": "You can use  Debian Sources List Generator . Modify the data in the /etc/apt/sources.list file by new data.  apt update   apt upgrade  apt install sudo  adduser [username] sudo  or  visudo  +  username   ALL=(ALL)   ALL  apt install firmware-misc-nonfree  - wi-fi driver  apt search [package_name]  - search the needed packages  dpkg-reconfigure tzdata  - change the timezone  nano /etc/profile  - set command alias for some commands which are often used  # add to the end\nalias ll='ls $LS_OPTIONS -l'\nalias l='ls $LS_OPTIONS -lA'\nalias rm='rm -i'\nalias cp='cp -i'\nalias mv='mv -i'  source /etc/profile  ssh-keygen -t ecdsa  - key generation", 
             "title": "Based configuration"
         }, 
         {
             "location": "/Debian/#troubleshooting", 
-            "text": "If you get GnuPG errors like:   GPG error: [..] Release: The following signatures couldn\u2019t be verified because the public key is not available: NO_PUBKEY [..]   apt update 2 1 | grep -o '[0-9A-Z]{16}$' | xargs  - try auto update  egrep -v '^#|^$' /etc/apt/sources.list{,.d/*.list}  - try to find bad repo and do rm manually  gpg --keyserver subkeys.pgp.net --recv KEY   gpg --export --armor KEY | sudo apt-key add  - add the key manually", 
+            "text": "If you get GnuPG errors like:   GPG error: [..] Release: The following signatures couldn\u2019t be verified because the public key is not available: NO_PUBKEY [..]   apt update 2 1 | grep -o '[0-9A-Z]{16}$' | xargs  - try auto update  egrep -v '^#|^$' /etc/apt/sources.list{,.d/*.list}  - try to find bad repo and do rm manually  gpg --keyserver subkeys.pgp.net --recv KEY   gpg --export --armor KEY | sudo apt-key add  - or add the key manually", 
             "title": "Troubleshooting"
         }
     ]

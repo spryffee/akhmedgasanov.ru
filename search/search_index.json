@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Markdown\n\n\nmkdocs\n\n\n\n\nmkdocs new [dir-name]\n - Create a new project.\n\n\nmkdocs serve\n - Start the live-reloading docs server.\n\n\nmkdocs build\n - Build the documentation site.\n\n\nmkdocs help\n - Print this help message.\n\n\n\n\ngit\n\n\ngit push origin master --force\n\nfgdgdfg\n\n\nProject layout\n\n\nmkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.", 
+            "text": "Markdown\n\n\nmkdocs\n\n\n\n\nmkdocs new [dir-name]\n - Create a new project.\n\n\nmkdocs serve\n - Start the live-reloading docs server.\n\n\nmkdocs build\n - Build the documentation site.\n\n\nmkdocs help\n - Print this help message.\n\n\n\n\ngit\n\n\ngit clone https://github.com/user/repository.git\n\n\ngit init\n\n\ngit push origin master --force\n\n\nProject layout\n\n\nmkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.", 
             "title": "Markdown"
         }, 
         {
@@ -17,7 +17,7 @@
         }, 
         {
             "location": "/#git", 
-            "text": "git push origin master --force \nfgdgdfg", 
+            "text": "git clone https://github.com/user/repository.git  git init  git push origin master --force", 
             "title": "git"
         }, 
         {

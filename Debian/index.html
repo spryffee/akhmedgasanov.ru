@@ -51,6 +51,9 @@
                     <li class="active">
                         <a href="./">Debian</a>
                     </li>
+                    <li >
+                        <a href="../xen/">Xen</a>
+                    </li>
                 </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -64,8 +67,8 @@
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
-                    <li class="disabled">
-                        <a rel="prev" >
+                    <li >
+                        <a rel="prev" href="../xen/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -79,6 +82,7 @@
     <ul class="nav bs-sidenav">
         <li class="main active"><a href="#debian-9-stretch">Debian 9 (stretch)</a></li>
             <li><a href="#based-configuration">Based configuration</a></li>
+            <li><a href="#networking">Networking</a></li>
             <li><a href="#troubleshooting">Troubleshooting</a></li>
     </ul>
 </div></div>
@@ -103,6 +107,12 @@ alias mv='mv -i'
 </code></pre>
 <p><code>source /etc/profile</code></p>
 <p><code>ssh-keygen -t ecdsa</code> - key generation</p>
+<h3 id="networking">Networking</h3>
+<pre><code>auto wlo1
+iface wlo1 inet dhcp
+wpa-essid [ssid]
+wpa-psk [passwd]
+</code></pre>
 <h3 id="troubleshooting">Troubleshooting</h3>
 <p>If you get GnuPG errors like:</p>
 <blockquote>

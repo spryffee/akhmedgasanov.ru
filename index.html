@@ -51,6 +51,9 @@
                     <li >
                         <a href="Debian/">Debian</a>
                     </li>
+                    <li >
+                        <a href="xen/">Xen</a>
+                    </li>
                 </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -102,6 +105,10 @@
 docs/
     index.md  # The documentation homepage.
     ...       # Other markdown pages, images and other files.
+    sudo sed -i "/#.*/d" /etc/keystone/keystone.conf
+удаляет все строки с #
+sudo sed -i "/^$/d" /etc/keystone/keystone.conf
+удаляе пустые строки
 </code></pre></div>
         </div>
 
@@ -184,5 +191,5 @@ docs/
 
 <!--
 MkDocs version : 0.17.2
-Build Date UTC : 2017-12-31 18:00:12
+Build Date UTC : 2018-01-01 16:35:04
 -->

@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Markdown\n\n\nmkdocs\n\n\n\n\nmkdocs new [dir-name]\n - Create a new project.\n\n\nmkdocs serve\n - Start the live-reloading docs server.\n\n\nmkdocs build\n - Build the documentation site.\n\n\nmkdocs help\n - Print this help message.\n\n\n\n\ngit\n\n\ngit clone https://github.com/user/repository.git\n\n\ngit init\n\n\ngit push origin master --force\n\n\nProject layout\n\n\nmkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.", 
+            "text": "Markdown\n\n\nmkdocs\n\n\n\n\nmkdocs new [dir-name]\n - Create a new project.\n\n\nmkdocs serve\n - Start the live-reloading docs server.\n\n\nmkdocs build\n - Build the documentation site.\n\n\nmkdocs help\n - Print this help message.\n\n\n\n\ngit\n\n\ngit clone https://github.com/user/repository.git\n\n\ngit init\n\n\ngit push origin master --force\n\n\nProject layout\n\n\nmkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.\n    sudo sed -i \"/#.*/d\" /etc/keystone/keystone.conf\n\u0443\u0434\u0430\u043b\u044f\u0435\u0442 \u0432\u0441\u0435 \u0441\u0442\u0440\u043e\u043a\u0438 \u0441 #\nsudo sed -i \"/^$/d\" /etc/keystone/keystone.conf\n\u0443\u0434\u0430\u043b\u044f\u0435 \u043f\u0443\u0441\u0442\u044b\u0435 \u0441\u0442\u0440\u043e\u043a\u0438", 
             "title": "Markdown"
         }, 
         {
@@ -22,12 +22,12 @@
         }, 
         {
             "location": "/#project-layout", 
-            "text": "mkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.", 
+            "text": "mkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.\n    sudo sed -i \"/#.*/d\" /etc/keystone/keystone.conf\n\u0443\u0434\u0430\u043b\u044f\u0435\u0442 \u0432\u0441\u0435 \u0441\u0442\u0440\u043e\u043a\u0438 \u0441 #\nsudo sed -i \"/^$/d\" /etc/keystone/keystone.conf\n\u0443\u0434\u0430\u043b\u044f\u0435 \u043f\u0443\u0441\u0442\u044b\u0435 \u0441\u0442\u0440\u043e\u043a\u0438", 
             "title": "Project layout"
         }, 
         {
             "location": "/Debian/", 
-            "text": "Debian 9 (stretch)\n\n\nBased configuration\n\n\nYou can use \nDebian Sources List Generator\n. Modify the data in the /etc/apt/sources.list file by new data.\n\n\napt update \n apt upgrade\n\n\napt install sudo\n\n\nadduser [username] sudo\n or \nvisudo\n + \nusername   ALL=(ALL)   ALL\n\n\napt install firmware-misc-nonfree\n - wi-fi driver\n\n\napt search [package_name]\n - search the needed packages\n\n\ndpkg-reconfigure tzdata\n - change the timezone\n\n\nnano /etc/profile\n - set command alias for some commands which are often used\n\n\n# add to the end\nalias ll='ls $LS_OPTIONS -l'\nalias l='ls $LS_OPTIONS -lA'\nalias rm='rm -i'\nalias cp='cp -i'\nalias mv='mv -i'\n\n\n\nsource /etc/profile\n\n\nssh-keygen -t ecdsa\n - key generation\n\n\nTroubleshooting\n\n\nIf you get GnuPG errors like:\n\n\n\n\nGPG error: [..] Release: The following signatures couldn\u2019t be verified because the public key is not available: NO_PUBKEY [..]\n\n\n\n\napt update 2\n1 | grep -o '[0-9A-Z]{16}$' | xargs\n - try auto update\n\n\negrep -v '^#|^$' /etc/apt/sources.list{,.d/*.list}\n - try to find bad repo and do rm manually\n\n\ngpg --keyserver subkeys.pgp.net --recv KEY\n \n\ngpg --export --armor KEY | sudo apt-key add\n - or add the key manually", 
+            "text": "Debian 9 (stretch)\n\n\nBased configuration\n\n\nYou can use \nDebian Sources List Generator\n. Modify the data in the /etc/apt/sources.list file by new data.\n\n\napt update \n apt upgrade\n\n\napt install sudo\n\n\nadduser [username] sudo\n or \nvisudo\n + \nusername   ALL=(ALL)   ALL\n\n\napt install firmware-misc-nonfree\n - wi-fi driver\n\n\napt search [package_name]\n - search the needed packages\n\n\ndpkg-reconfigure tzdata\n - change the timezone\n\n\nnano /etc/profile\n - set command alias for some commands which are often used\n\n\n# add to the end\nalias ll='ls $LS_OPTIONS -l'\nalias l='ls $LS_OPTIONS -lA'\nalias rm='rm -i'\nalias cp='cp -i'\nalias mv='mv -i'\n\n\n\nsource /etc/profile\n\n\nssh-keygen -t ecdsa\n - key generation\n\n\nNetworking\n\n\nauto wlo1\niface wlo1 inet dhcp\nwpa-essid [ssid]\nwpa-psk [passwd]\n\n\n\nTroubleshooting\n\n\nIf you get GnuPG errors like:\n\n\n\n\nGPG error: [..] Release: The following signatures couldn\u2019t be verified because the public key is not available: NO_PUBKEY [..]\n\n\n\n\napt update 2\n1 | grep -o '[0-9A-Z]{16}$' | xargs\n - try auto update\n\n\negrep -v '^#|^$' /etc/apt/sources.list{,.d/*.list}\n - try to find bad repo and do rm manually\n\n\ngpg --keyserver subkeys.pgp.net --recv KEY\n \n\ngpg --export --armor KEY | sudo apt-key add\n - or add the key manually", 
             "title": "Debian"
         }, 
         {
@@ -41,9 +41,19 @@
             "title": "Based configuration"
         }, 
         {
+            "location": "/Debian/#networking", 
+            "text": "auto wlo1\niface wlo1 inet dhcp\nwpa-essid [ssid]\nwpa-psk [passwd]", 
+            "title": "Networking"
+        }, 
+        {
             "location": "/Debian/#troubleshooting", 
             "text": "If you get GnuPG errors like:   GPG error: [..] Release: The following signatures couldn\u2019t be verified because the public key is not available: NO_PUBKEY [..]   apt update 2 1 | grep -o '[0-9A-Z]{16}$' | xargs  - try auto update  egrep -v '^#|^$' /etc/apt/sources.list{,.d/*.list}  - try to find bad repo and do rm manually  gpg --keyserver subkeys.pgp.net --recv KEY   gpg --export --armor KEY | sudo apt-key add  - or add the key manually", 
             "title": "Troubleshooting"
+        }, 
+        {
+            "location": "/xen/", 
+            "text": "apt-get install xen-system-amd64 xen-tools\n        \n\n\nmv -i /etc/grub.d/20_linux_xen /etc/grub.d/08_linux_xen\n - grub priority\n\n\nupdate-grub\n\n\nxl dmesg | grep VMX\n - to check the virtualization extensions. If not already enabled in BIOS, enable it.\n\n\napt-get install lvm2\n\n\nvgcreate vg0 /dev/sda7\n\n\napt-get install net-tools\n\n\nauto virbr0\niface virbr0 inet static\naddress 10.8.8.18/24\nbridge_ports eno1\nbridge_fd\nbridge_stp off\nbridge_maxwait 0\n\n\n\nxen-create-image --hostname $guest --ip x.x.x.x --netmask x.x.x.x --gateway x.x.x.x --vcpus 2 --dist stretch\n\n\nnano /etc/xen/$guest.cfg\n\n    vif = [ 'bridge=virbr0', 'bridge=virbr1' ]\n\nxl network-list \nhostname\n\n\nxl list\n\n\nxl top \nhostname\n\n\nxl create /etc/xen/\nhostname\n.cfg\n - to start the created VM\n\n\nxl console \nhostname\n\n\nxl restart \nhostname\n\n\nxen-delete-image VMs_name\n - to erase a VM image", 
+            "title": "Xen"
         }
     ]
 }

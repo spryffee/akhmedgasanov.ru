@@ -52,6 +52,9 @@
                         <a href="./">Debian</a>
                     </li>
                     <li >
+                        <a href="../OvS/">OvS</a>
+                    </li>
+                    <li >
                         <a href="../xen/">Xen</a>
                     </li>
                 </ul>
@@ -68,7 +71,7 @@
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../xen/">
+                        <a rel="prev" href="../OvS/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -113,6 +116,8 @@ iface wlo1 inet dhcp
 wpa-essid [ssid]
 wpa-psk [passwd]
 </code></pre>
+<p><code>route add -net 10.10.0.0/24 dev mgmt1</code></p>
+<p><code>route del -net 10.10.0.0/24 dev mgmt1</code></p>
 <h3 id="troubleshooting">Troubleshooting</h3>
 <p>If you get GnuPG errors like:</p>
 <blockquote>
@@ -121,7 +126,9 @@ wpa-psk [passwd]
 <p><code>apt update 2&gt;&amp;1 | grep -o '[0-9A-Z]{16}$' | xargs</code> - try auto update</p>
 <p><code>egrep -v '^#|^$' /etc/apt/sources.list{,.d/*.list}</code> - try to find bad repo and do rm manually</p>
 <p><code>gpg --keyserver subkeys.pgp.net --recv KEY</code> 
-<code>gpg --export --armor KEY | sudo apt-key add</code> - or add the key manually</p></div>
+<code>gpg --export --armor KEY | sudo apt-key add</code> - or add the key manually</p>
+<p><code>/etc/apt/trusted.gpg</code> - or just removing</p>
+<p><code>fuser -vki /var/lib/dpkg/lock</code> - to fix error with /var/lib/apt/lists/lock - open </p></div>
         </div>
 
         <footer class="col-md-12">

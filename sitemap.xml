@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-01-01</lastmod>
+     <lastmod>2018-01-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,15 @@
     
     <url>
      <loc>/Debian/</loc>
-     <lastmod>2018-01-01</lastmod>
+     <lastmod>2018-01-30</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/OvS/</loc>
+     <lastmod>2018-01-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -20,7 +28,7 @@
     
     <url>
      <loc>/xen/</loc>
-     <lastmod>2018-01-01</lastmod>
+     <lastmod>2018-01-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

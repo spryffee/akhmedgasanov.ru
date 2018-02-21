@@ -83,28 +83,43 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#_1">Создаем коммутатор и добавляем порты</a></li>
-        <li class="main "><a href="#_2">Удаляем коммутатор и порты</a></li>
+        <li class="main active"><a href="#basic-configuration">Basic configuration</a></li>
         <li class="main "><a href="#vlan">VLAN</a></li>
         <li class="main "><a href="#lacp">Агрегируем линки (LACP)</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h3 id="_1">Создаем коммутатор и добавляем порты</h3>
-<p><code>ovs-vsctl add-br &lt;имя_коммутатора&gt;</code></p>
-<p><code>ovs-vsctl add-br ovs-sw0</code></p>
-<p><code>ovs-vsctl add-port &lt;имя_комутатора&gt; &lt;имя_физ.Интерфейса&gt;</code></p>
-<p><code>ovs-vsctl add-port ovs-sw0 eth0</code></p>
-<p><code>ovs-vsctl show</code></p>
+<h3 id="basic-configuration">Basic configuration</h3>
 <p>Физический интерфейс, включаемый в ovs-sw0, не должен иметь IP-адреса или любых других настроек.</p>
 <p>Один коммутатор не должен иметь больше одного интерфейса по причине использования OvS свичем STP протокола.</p>
 <p>Использовать несколько физических интерфейсов можно только если они будут агрегированы.</p>
-<h3 id="_2">Удаляем коммутатор и порты</h3>
+<p><code>ovs-vsctl add-br ovs-sw0</code></p>
+<p><code>ovs-vsctl add-port ovs-sw0 eth0</code></p>
+<p><code>ovs-vsctl add-port ovs-sw0 mgmt0</code></p>
+<p><code>ovs-vsctl set interface mgmt0 type=internal</code></p>
+<p><code>ovs-vsctl show</code></p>
+<p>nano /etc/network/interfaces</p>
+<pre><code>auto lo
+iface lo inet loopback
+
+auto enp1s0
+iface enp1s0 inet manual
+
+allow-hotplug mgmt0
+iface mgmt0 inet static
+address pub_ip/27
+gateway pub_gw
+dns-nameservers 77.88.8.8
+
+allow-hotplug mgmt1
+iface mgmt1 inet static
+address 10.10.0.1/24
+</code></pre>
 <p><code>ovs-vsctl list-br</code></p>
-<p><code>ovs-vsctl list-ports &lt;имя_коммутатора&gt;</code></p>
-<p><code>ovs-vsctl del-port  &lt;имя_коммутатора&gt; &lt;имя_порта&gt;</code></p>
-<p><code>ovs-vsctl del-br &lt;имя_коммутатора&gt;</code></p>
+<p><code>ovs-vsctl list-ports ovs-sw0</code></p>
+<p><code>ovs-vsctl del-port ovs-sw0 mgmt0</code></p>
+<p><code>ovs-vsctl del-br ovs-sw0</code></p>
 <h3 id="vlan">VLAN</h3>
 <p>Разрешим порту eth0 пропускать во внешний мир трафик из определенных VLAN-ов:</p>
 <p>ovs-vsctl set port eth0 trunks=100,200,300</p>

@@ -92,12 +92,12 @@
                 <div class="col-md-9" role="main">
 
 <h2 id="debian-9-stretch">Debian 9 (stretch)</h2>
+<p>sudo dd if=~/Загрузки/debian-9.3.0-amd64-netinst.iso of=/dev/sdb</p>
 <h3 id="based-configuration">Based configuration</h3>
 <p>You can use <a href="https://debgen.simplylinux.ch">Debian Sources List Generator</a>. Modify the data in the /etc/apt/sources.list file by new data.</p>
 <p><code>apt update &amp;&amp; apt upgrade</code></p>
-<p><code>apt install sudo</code></p>
+<p><code>apt install sudo net-tools</code></p>
 <p><code>adduser [username] sudo</code> or <code>visudo</code> + <code>username   ALL=(ALL)   ALL</code></p>
-<p><code>apt install firmware-misc-nonfree</code> - wi-fi driver</p>
 <p><code>apt search [package_name]</code> - search the needed packages</p>
 <p><code>dpkg-reconfigure tzdata</code> - change the timezone</p>
 <p><code>nano /etc/profile</code> - set command alias for some commands which are often used</p>
@@ -110,7 +110,14 @@ alias mv='mv -i'
 </code></pre>
 <p><code>source /etc/profile</code></p>
 <p><code>ssh-keygen -t ecdsa</code> - key generation</p>
+<p><code>ssh -L PORT:localhost:PORT HOSTNAME</code> - ssh tunnel</p>
 <h3 id="networking">Networking</h3>
+<pre><code>auto virbr0
+iface virbr0 inet static
+        address 10.10.0.1/24
+        bridge_ports eno1
+</code></pre>
+<p><code>apt install firmware-misc-nonfree</code> - wi-fi driver</p>
 <pre><code>auto wlo1
 iface wlo1 inet dhcp
 wpa-essid [ssid]

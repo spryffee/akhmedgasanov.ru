@@ -83,35 +83,64 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#xen-installation">Xen installation</a></li>
+        <li class="main "><a href="#cold-migration">Cold Migration</a></li>
+        <li class="main "><a href="#live-migration">Live Migration</a></li>
+        <li class="main "><a href="#ha-cluster">HA Cluster</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
+<h3 id="xen-installation">Xen installation</h3>
 <p><code>apt-get install xen-system-amd64 xen-tools</code>        </p>
 <p><code>mv -i /etc/grub.d/20_linux_xen /etc/grub.d/08_linux_xen</code> - grub priority</p>
 <p><code>update-grub</code></p>
 <p><code>xl dmesg | grep VMX</code> - to check the virtualization extensions. If not already enabled in BIOS, enable it.</p>
 <p><code>apt-get install lvm2</code></p>
 <p><code>vgcreate vg0 /dev/sda7</code></p>
-<p><code>apt-get install net-tools</code></p>
-<pre><code>auto virbr0
-iface virbr0 inet static
-address 10.8.8.18/24
-bridge_ports eno1
-bridge_fd
-bridge_stp off
-bridge_maxwait 0
+<p><code>dd if=/dev/zero of=ubuntufull.disk bs=1024k count=0 seek=10240</code></p>
+<p>Configure the mirrors.conf and xen-tools.conf files.</p>
+<p><code>nano xl.conf</code></p>
+<pre><code>vif.default.script="vif-openvswitch"
+vif.default.bridge="xenbr0"
 </code></pre>
-<p><code>xen-create-image --hostname $guest --ip x.x.x.x --netmask x.x.x.x --gateway x.x.x.x --vcpus 2 --dist stretch</code></p>
+<p>Create PV DomU:</p>
+<p><code>xen-create-image --hostname=$guest --ip x.x.x.x --netmask x.x.x.x --gateway x.x.x.x --vcpus 2 --dist stretch</code></p>
+<p><code>xen-create-image --hostname=$guest --memory=2gb --vcpus=2 --lvm=vg0 --dhcp --pygrub --dist=stretch</code></p>
 <p><code>nano /etc/xen/$guest.cfg</code>
     vif = [ 'bridge=virbr0', 'bridge=virbr1' ]
 <code>xl network-list &lt;hostname&gt;</code></p>
+<p>Create HVM DomU:</p>
+<p><code>lvcreate -n name -L 20G lvmgroup</code></p>
+<p><code>nano /etc/xen/web.cfg</code>                                                 </p>
+<pre><code>builder = "hvm"
+name = "web-hvm"
+memory = "2048"
+vcpus = 2
+vif = [ 'script=vif-openvswitch,bridge=xenbr0' ]
+disk = ['phy:/dev/vg0/web,hda,w','file:/srv/share/ubuntu-14.04.1-server-amd64.iso,hdc:cdrom,r']
+#disk = ['phy:/dev/vg0/web,hda,w']
+vnc = 1
+#boot="c"
+boot="dc"
+</code></pre>
 <p><code>xl list</code></p>
-<p><code>xl top &lt;hostname&gt;</code></p>
-<p><code>xl create /etc/xen/&lt;hostname&gt;.cfg</code> - to start the created VM</p>
+<p><code>xl create /etc/xen/&lt;hostname&gt;.cfg</code></p>
 <p><code>xl console &lt;hostname&gt;</code></p>
 <p><code>xl restart &lt;hostname&gt;</code></p>
-<p><code>xen-delete-image VMs_name</code> - to erase a VM image </p></div>
+<p><code>xen-delete-image VMs_name --lvm=vg01</code></p>
+<h3 id="cold-migration">Cold Migration</h3>
+<p><code>xl save &lt;domain id&gt; &lt;savefile&gt;</code></p>
+<p><code>scp &lt;savefile&gt; &lt;target.domain.tld:/path/&gt;</code></p>
+<p><code>xl restore &lt;savefile&gt;</code></p>
+<h3 id="live-migration">Live Migration</h3>
+<p><code>nano /etc/xen/xend-config.sxp</code></p>
+<pre><code>(xend-relocation-server yes)
+</code></pre>
+<p><code>/etc/init.d/xend restart</code></p>
+<p><code>xl migrate &lt;domain id&gt; &lt;destination machine&gt;</code></p>
+<h3 id="ha-cluster">HA Cluster</h3>
+<p><code>xl remus -F -n -d 6 10.10.0.20</code></p></div>
         </div>
 
         <footer class="col-md-12">

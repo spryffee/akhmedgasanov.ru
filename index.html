@@ -99,6 +99,7 @@
 <li><code>mkdocs build</code> - Build the documentation site.</li>
 <li><code>mkdocs help</code> - Print this help message.</li>
 </ul>
+<p><code>mkdocs build --clean</code> in mkdocs directory</p>
 <h2 id="git">git</h2>
 <p><code>git clone https://github.com/user/repository.git</code>
 <code>git init</code></p>
@@ -108,7 +109,9 @@
 docs/
     index.md  # The documentation homepage.
     ...       # Other markdown pages, images and other files.
-    sudo sed -i "/#.*/d" /etc/keystone/keystone.conf
+
+
+sudo sed -i "/#.*/d" /etc/keystone/keystone.conf
 удаляет все строки с #
 sudo sed -i "/^$/d" /etc/keystone/keystone.conf
 удаляе пустые строки
@@ -196,5 +199,5 @@ while true; do curl 10.8.8.204; sleep 1; echo "\n"; done
 
 <!--
 MkDocs version : 0.17.2
-Build Date UTC : 2018-01-30 07:30:45
+Build Date UTC : 2018-02-21 15:37:43
 -->

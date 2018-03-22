@@ -86,6 +86,7 @@
         <li class="main active"><a href="#basic-configuration">Basic configuration</a></li>
         <li class="main "><a href="#vlan">VLAN</a></li>
         <li class="main "><a href="#lacp">Агрегируем линки (LACP)</a></li>
+        <li class="main "><a href="#mirroring">Mirroring</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -121,6 +122,8 @@ address 10.10.0.1/24
 <p><code>ovs-vsctl del-port ovs-sw0 mgmt0</code></p>
 <p><code>ovs-vsctl del-br ovs-sw0</code></p>
 <h3 id="vlan">VLAN</h3>
+<p><code>ovs-vsctl set port &lt;имя_порта&gt; tag=10</code></p>
+<p><code>ovs-vsctl add-br sw0-vlan10 ovs-sw0 10</code></p>
 <p>Разрешим порту eth0 пропускать во внешний мир трафик из определенных VLAN-ов:</p>
 <p>ovs-vsctl set port eth0 trunks=100,200,300</p>
 <p>Вместо команды set, могут также использоваться:</p>
@@ -142,7 +145,13 @@ wait-until &lt;таблица&gt; &lt;запись&gt; &lt;ключ=значен
 <p><code>ovs-vsctl add-bond &lt;имя_коммутатора&gt; &lt;имя_нового_bonda&gt; &lt;список_физ.интерфейсов&gt;</code></p>
 <p><code>ovs-vsctl add-bond ovs-sw0 bond0 eth0 eth1</code></p>
 <p><code>ovs-vsctl set port bond0 lacp=active</code></p>
-<p><code>ovs-appctl lacp/show &lt;bond-интерфейс&gt;</code></p></div>
+<p><code>ovs-appctl lacp/show &lt;bond-интерфейс&gt;</code></p>
+<h3 id="mirroring">Mirroring</h3>
+<p><code>ovs-vsctl -- set Bridge xenbr1 mirrors=@m \
+-- --id=@enp1s0 get Port enp1s0 \
+-- --id=@mirror1 get Port mirror1 \
+-- --id=@m create Mirror name=enp1s0-mirror select-dst-port=@enp1s0 \
+select-src-port=@enp1s0 output-port=@mirror1</code></p></div>
         </div>
 
         <footer class="col-md-12">

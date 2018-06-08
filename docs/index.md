@@ -23,9 +23,5 @@
         ...       # Other markdown pages, images and other files.
 
     
-    sudo sed -i "/#.*/d" /etc/keystone/keystone.conf
-    удаляет все строки с #
-    sudo sed -i "/^$/d" /etc/keystone/keystone.conf
-    удаляе пустые строки
 
     while true; do curl 10.8.8.204; sleep 1; echo "\n"; done

@@ -31,6 +31,13 @@ You can use [Debian Sources List Generator](https://debgen.simplylinux.ch). Modi
 `ssh-keygen -t ecdsa` - key generation
 
 `ssh -L PORT:localhost:PORT HOSTNAME` - ssh tunnel
+
+
+`sudo sed -i "/#.*/d" /etc/keystone/keystone.conf` удаляет все строки с решеткой
+
+`sudo sed -i "/^$/d" /etc/keystone/keystone.conf` удаляет пустые строки
+
+
 ### Networking
 
     auto virbr0

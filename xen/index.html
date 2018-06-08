@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Xen - Akhmed Gasanov docs</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Xen";
+    var mkdocs_page_input_path = "xen.md";
+    var mkdocs_page_url = "/xen/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Akhmed Gasanov docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Markdown</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Debian/">Debian</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../OvS/">OvS</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Xen</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#xen-installation">Xen installation</a></li>
+    
+
+    <li class="toctree-l2"><a href="#cold-migration">Cold Migration</a></li>
+    
+
+    <li class="toctree-l2"><a href="#live-migration">Live Migration</a></li>
+    
+
+    <li class="toctree-l2"><a href="#ha-cluster">HA Cluster</a></li>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Akhmed Gasanov docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Xen</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h3 id="xen-installation">Xen installation</h3>
+<p><code>apt-get install xen-system-amd64 xen-tools</code>        </p>
+<p><code>mv -i /etc/grub.d/20_linux_xen /etc/grub.d/08_linux_xen</code> - grub priority</p>
+<p><code>update-grub</code></p>
+<p><code>xl dmesg | grep VMX</code> - to check the virtualization extensions. If not already enabled in BIOS, enable it.</p>
+<p><code>apt-get install lvm2</code></p>
+<p><code>vgcreate vg0 /dev/sda7</code></p>
+<p><code>dd if=/dev/zero of=ubuntufull.disk bs=1024k count=0 seek=10240</code></p>
+<p>Configure the mirrors.conf and xen-tools.conf files. yyy</p>
+<p><code>nano xl.conf</code></p>
+<pre><code>vif.default.script="vif-openvswitch"
+vif.default.bridge="xenbr0"
+</code></pre>
+<p>Create PV DomU:</p>
+<p><code>xen-create-image --hostname=$guest --ip x.x.x.x --netmask x.x.x.x --gateway x.x.x.x --vcpus 2 --dist stretch</code></p>
+<p><code>xen-create-image --hostname=$guest --memory=2gb --vcpus=2 --lvm=vg0 --dhcp --pygrub --dist=stretch</code></p>
+<p><code>nano /etc/xen/$guest.cfg</code>
+    vif = [ 'bridge=virbr0', 'bridge=virbr1' ]
+<code>xl network-list &lt;hostname&gt;</code></p>
+<p>Create HVM DomU:</p>
+<p><code>lvcreate -n name -L 20G lvmgroup</code></p>
+<p><code>nano /etc/xen/web.cfg</code>                                                 </p>
+<pre><code>builder = "hvm"
+name = "web-hvm"
+memory = "2048"
+vcpus = 2
+vif = [ 'script=vif-openvswitch,bridge=xenbr0' ]
+disk = ['phy:/dev/vg0/web,hda,w','file:/srv/share/ubuntu-14.04.1-server-amd64.iso,hdc:cdrom,r']
+#disk = ['phy:/dev/vg0/web,hda,w']
+vnc = 1
+#boot="c"
+boot="dc"
+</code></pre>
+<p><code>xl list</code></p>
+<p><code>xl create /etc/xen/&lt;hostname&gt;.cfg</code></p>
+<p><code>xl console &lt;hostname&gt;</code></p>
+<p><code>xl restart &lt;hostname&gt;</code></p>
+<p><code>xen-delete-image VMs_name --lvm=vg01</code></p>
+<h3 id="cold-migration">Cold Migration</h3>
+<p><code>xl save &lt;domain id&gt; &lt;savefile&gt;</code></p>
+<p><code>scp &lt;savefile&gt; &lt;target.domain.tld:/path/&gt;</code></p>
+<p><code>xl restore &lt;savefile&gt;</code></p>
+<h3 id="live-migration">Live Migration</h3>
+<p><code>nano /etc/xen/xend-config.sxp</code></p>
+<pre><code>(xend-relocation-server yes)
+</code></pre>
+<p><code>/etc/init.d/xend restart</code></p>
+<p><code>xl migrate &lt;domain id&gt; &lt;destination machine&gt;</code></p>
+<h3 id="ha-cluster">HA Cluster</h3>
+<p><code>xl remus -F -n -d 6 10.10.0.20</code></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../OvS/" class="btn btn-neutral" title="OvS"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../OvS/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>

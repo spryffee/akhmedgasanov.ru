@@ -54,7 +54,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../Debian/">Debian</a>
+    <a class="" href="../Linux/">Linux</a>
 	    </li>
           
             <li class="toctree-l1 current">
@@ -175,20 +175,6 @@ wait-until &lt;таблица&gt; &lt;запись&gt; &lt;ключ=значен
 -- --id=@mirror1 get Port mirror1 \
 -- --id=@m create Mirror name=enp1s0-mirror select-dst-port=@enp1s0 \
 select-src-port=@enp1s0 output-port=@mirror1</code></p>
-<p>CVE-2016-0792</p>
-<p>CVE-2015-8103</p>
-<p>alert http $EXTERNAL_NET any -&gt; $HOME_NET any (msg:"ET WEB_SPECIFIC_APPS Jenkins Script Console Usage (Metasploit Unix Shell)"; flow:to_server,established; content:"POST"; http_method; nocase; content:"/script"; http_uri; nocase; pcre:"/\/script\/?$/Ui"; content:"sun.misc.BASE64Decoder"; nocase; http_client_body; content:".decodeBuffer"; nocase; http_client_body; content:"/bin/sh"; http_client_body; fast_pattern; classtype:attempted-user; sid:2016296; rev:7; metadata:affected_product Any, attack_target Client_and_Server, deployment Perimeter, deployment Internet, deployment Internal, deployment Datacenter, tag Metasploit, signature_severity Critical, created_at 2013_01_24, updated_at 2016_07_01;)</p>
-<p>alert http $EXTERNAL_NET any -&gt; $HOME_NET any (msg:"ET WEB_SPECIFIC_APPS Possible Jenkins CLI RCE (CVE-2017-1000353)"; flow:to_server,established; content:"POST"; http_method; nocase; content:"/cli"; http_uri; depth:4; content:"Side|3a 20|upload"; http_header; content:"JENKINS REMOTING CAPACITY]===&gt;rO0ABXNyABpodWRzb24ucmVtb3RpbmcuQ2FwYWJ"; http_client_body; fast_pattern; metadata: former_category WEB_SPECIFIC_APPS; reference:url,blogs.securiteam.com/index.php/archives/3171; reference:cve,2017-1000353; reference:url,research.checkpoint.com/jenkins-miner-one-biggest-mining-operations-ever-discovered/; classtype:attempted-user; sid:2025376; rev:2; metadata:created_at 2018_02_21, updated_at 2018_02_21;)</p>
-<p>alert tcp any any -&gt; $HOME_NET any (msg:"ET EXPLOIT Serialized Java Object Calling Common Collection Function"; flow:to_server,established; content:"rO0ABXNyA"; content:"jb21tb25zLmNvbGxlY3Rpb25z"; fast_pattern; distance:0; reference:url,github.com/foxglovesec/JavaUnserializeExploits; classtype:misc-activity; sid:2022114; rev:1; metadata:created_at 2015_11_17, updated_at 2015_11_17;)</p>
-<p>alert http any any -&gt; $HOME_NET any (msg:"ET EXPLOIT Apache Struts 2 REST Plugin XStream RCE (ProcessBuilder)"; flow:to_server,established; content:"java.lang.ProcessBuilder"; nocase; http_client_body; fast_pattern; content:"<command"; nocase; distance:0; http_client_body; pcre:"/^[\s>]/RPs"; metadata: former_category EXPLOIT; reference:cve,2017-9805; reference:url,lgtm.com/blog/apache_struts_CVE-2017-9805_announcement; classtype:attempted-user; sid:2024663; rev:1; metadata:affected_product Apache_Struts2, attack_target Web_Server, deployment Perimeter, signature_severity Critical, created_at 2017_09_06, performance_impact Low, updated_at 2017_09_06;)</p>
-<p>alert http any any -&gt; $HOME_NET any (msg:"ET EXPLOIT Apache Struts 2 REST Plugin XStream RCE (Runtime.Exec)"; flow:to_server,established; content:"java.lang.Runtime"; nocase; http_client_body; fast_pattern; content:".exec"; distance:0; http_client_body; content:"<command"; nocase; distance:0; http_client_body; pcre:"/^[\s>]/RPs"; metadata: former_category EXPLOIT; reference:cve,2017-9805; reference:url,lgtm.com/blog/apache_struts_CVE-2017-9805_announcement; classtype:attempted-user; sid:2024664; rev:1; metadata:affected_product Apache_Struts2, attack_target Web_Server, deployment Perimeter, signature_severity Critical, created_at 2017_09_06, performance_impact Low, updated_at 2017_09_06;)</p>
-<p>cve 2016-1209</p>
-<p>alert http $EXTERNAL_NET any -&gt; $HOME_NET any (msg:"ET WEB_SERVER PHP tags in HTTP POST"; flow:established,to_server; content:"POST"; nocase; http_method; content:"&lt;?php"; nocase; http_client_body; fast_pattern:only; reference:url,isc.sans.edu/diary.html?storyid=9478; classtype:web-application-attack; sid:2011768; rev:6; metadata:created_at 2010_09_28, updated_at 2010_09_28;)
-2011768 || ET WEB_SERVER PHP tags in HTTP POST || url,isc.sans.edu/diary.html?storyid=9478</p>
-<p>alert http $EXTERNAL_NET any -&gt; $HOME_NET any (msg:"ET WEB_SPECIFIC_APPS Jenkins Script Console Usage (Metasploit Unix Shell)"; flow:to_server,established; content:"POST"; http_method; nocase; content:"/script"; http_uri; nocase; pcre:"/\/script\/?$/Ui"; content:"sun.misc.BASE64Decoder"; nocase; http_client_body; content:".decodeBuffer"; nocase; http_client_body; content:"/bin/sh"; http_client_body; fast_pattern; classtype:attempted-user; metadata:created_by_sne_students)</p>
-<p>alert http $EXTERNAL_NET any -&gt; $HOME_NET any (msg:"ET WEB_SPECIFIC_APPS Possible Jenkins CLI RCE (CVE-2017-1000353)"; flow:to_server,established; content:"POST"; http_method; nocase; content:"/cli"; http_uri; depth:4; content:"Side|3a 20|upload"; http_header; content:"JENKINS REMOTING CAPACITY]===&gt;rO0ABXNyABpodWRzb24ucmVtb3RpbmcuQ2FwYWJ"; http_client_body; fast_pattern; metadata: former_category WEB_SPECIFIC_APPS; reference:url,blogs.securiteam.com/index.php/archives/3171; reference:cve,2017-1000353; reference:url,research.checkpoint.com/jenkins-miner-one-biggest-mining-operations-ever-discovered/; classtype:attempted-user; sid:2025376; rev:2; metadata:created_at 2018_02_21, updated_at 2018_02_21;)</p>
-<p>alert tcp any any -&gt; $HOME_NET any (msg:"ET EXPLOIT Serialized Java Object Calling Common Collection Function"; flow:to_server,established; content:"rO0ABXNyA"; content:"jb21tb25zLmNvbGxlY3Rpb25z"; fast_pattern; distance:0; reference:url,github.com/foxglovesec/JavaUnserializeExploits; classtype:misc-activity; sid:2022114; rev:1; metadata:created_at 2015_11_17, updated_at 2015_11_17;)</p>
-<p>alert http any any -&gt; $HOME_NET any (msg:"EXPLOIT DETECTED REST Plugin XStream RCE (ProcessBuilder)"; flow:to_server,established; content:"java.lang.ProcessBuilder"; nocase; http_client_body; fast_pattern; content:"<command"; nocase; distance:0; http_client_body; pcre:"/^[\s>]/RPs"; metadata: former_category EXPLOIT; reference:cve,2017-9805; reference:url,lgtm.com/blog/apache_struts_CVE-2017-9805_announcement; classtype:attempted-user; sid:2024663; rev:1; metadata:created_by_SNE_students)</p>
               
             </div>
           </div>
@@ -199,7 +185,7 @@ select-src-port=@enp1s0 output-port=@mirror1</code></p>
         <a href="../xen/" class="btn btn-neutral float-right" title="Xen">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../Debian/" class="btn btn-neutral" title="Debian"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Linux/" class="btn btn-neutral" title="Linux"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -225,7 +211,7 @@ select-src-port=@enp1s0 output-port=@mirror1</code></p>
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../Debian/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../Linux/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../xen/" style="color: #fcfcfc">Next &raquo;</a></span>

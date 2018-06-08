@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Debian - Akhmed Gasanov docs</title>
+  <title>Linux - Akhmed Gasanov docs</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Debian";
-    var mkdocs_page_input_path = "Debian.md";
-    var mkdocs_page_url = "/Debian/";
+    var mkdocs_page_name = "Linux";
+    var mkdocs_page_input_path = "Linux.md";
+    var mkdocs_page_url = "/Linux/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -54,7 +54,7 @@
           
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">Debian</a>
+    <a class="current" href="./">Linux</a>
     <ul class="subnav">
             
     <li class="toctree-l2"><a href="#debian-9-stretch">Debian 9 (stretch)</a></li>
@@ -105,7 +105,7 @@
     
       
     
-    <li>Debian</li>
+    <li>Linux</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -135,6 +135,8 @@ alias mv='mv -i'
 <p><code>source /etc/profile</code></p>
 <p><code>ssh-keygen -t ecdsa</code> - key generation</p>
 <p><code>ssh -L PORT:localhost:PORT HOSTNAME</code> - ssh tunnel</p>
+<p><code>sudo sed -i "/#.*/d" /etc/keystone/keystone.conf</code> удаляет все строки с решеткой</p>
+<p><code>sudo sed -i "/^$/d" /etc/keystone/keystone.conf</code> удаляет пустые строки</p>
 <h3 id="networking">Networking</h3>
 <pre><code>auto virbr0
 iface virbr0 inet static

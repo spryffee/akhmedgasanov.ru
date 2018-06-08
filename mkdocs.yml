@@ -1,4 +1,3 @@
 site_name: Akhmed Gasanov docs
-theme: readthedocs
+theme: mkdocs
 site_url: http://akhmedgasanov.ru/
-#site_dir: /home/spryffee/PycharmProjects/akhmedgasanov.ru/

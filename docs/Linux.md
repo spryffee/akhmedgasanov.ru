@@ -1,23 +1,31 @@
  
 ## Debian 9 (stretch)
 
-sudo dd if=~/Загрузки/debian-9.3.0-amd64-netinst.iso of=/dev/sdb
+_dd_  
+
+    sudo dd if=~/Загрузки/debian-9.3.0-amd64-netinst.iso of=/dev/sdb
+    dd if=/dev/zero of=ubuntufull.disk bs=1024k count=0 seek=10240
+
+_sed_
+
+`sudo sed -i "/#.*/d" /etc/keystone/keystone.conf` удаляет все строки с решеткой
+
+`sudo sed -i "/^$/d" /etc/keystone/keystone.conf` удаляет пустые строки
+
 
 ### Based configuration
 
 You can use [Debian Sources List Generator](https://debgen.simplylinux.ch). Modify the data in the /etc/apt/sources.list file by new data.
 
-`apt update && apt upgrade`
+    apt update && apt upgrade
+    apt install sudo net-tools
+    adduser [username] sudo or visudo + `username   ALL=(ALL)   ALL
+    apt search [package_name]
+    dpkg-reconfigure tzdata
 
-`apt install sudo net-tools`
+Set up command alias for some commands which are often used
 
-`adduser [username] sudo` or `visudo` + `username   ALL=(ALL)   ALL`
-
-`apt search [package_name]` - search the needed packages
-
-`dpkg-reconfigure tzdata` - change the timezone
-
-`nano /etc/profile` - set command alias for some commands which are often used
+_nano /etc/profile_
 
     # add to the end
     alias ll='ls $LS_OPTIONS -l'
@@ -25,17 +33,7 @@ You can use [Debian Sources List Generator](https://debgen.simplylinux.ch). Modi
     alias rm='rm -i'
     alias cp='cp -i'
     alias mv='mv -i'
-
-`source /etc/profile`
-
-`ssh-keygen -t ecdsa` - key generation
-
-`ssh -L PORT:localhost:PORT HOSTNAME` - ssh tunnel
-
-
-`sudo sed -i "/#.*/d" /etc/keystone/keystone.conf` удаляет все строки с решеткой
-
-`sudo sed -i "/^$/d" /etc/keystone/keystone.conf` удаляет пустые строки
+and apply by command _source /etc/profile_
 
 
 ### Networking
@@ -52,10 +50,10 @@ You can use [Debian Sources List Generator](https://debgen.simplylinux.ch). Modi
     wpa-essid [ssid]
     wpa-psk [passwd]
 
+Routes
 
-`route add -net 10.10.0.0/24 dev mgmt1`
-
-`route del -net 10.10.0.0/24 dev mgmt1`
+    route add -net 10.10.0.0/24 dev mgmt1
+    route del -net 10.10.0.0/24 dev mgmt1
 
 ### Troubleshooting
 

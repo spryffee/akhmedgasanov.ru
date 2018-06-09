@@ -344,15 +344,20 @@
                   <h1>Xen</h1>
                 
                 <h3 id="xen-installation">Xen installation</h3>
-<p><code>apt-get install xen-system-amd64 xen-tools</code>        </p>
-<p><code>mv -i /etc/grub.d/20_linux_xen /etc/grub.d/08_linux_xen</code> - grub priority</p>
-<p><code>update-grub</code></p>
-<p><code>xl dmesg | grep VMX</code> - to check the virtualization extensions. If not already enabled in BIOS, enable it.</p>
-<p><code>apt-get install lvm2</code></p>
-<p><code>vgcreate vg0 /dev/sda7</code></p>
+<p>Install xen and set up grub priority. Check the virtualization extensions. 
+If not already enabled in BIOS, enable it.</p>
+<pre><code>apt-get install xen-system-amd64 xen-tools      
+mv -i /etc/grub.d/20_linux_xen /etc/grub.d/08_linux_xen
+update-grub
+xl dmesg | grep VMX
+</code></pre>
+<p>We also can prepare lvm partition</p>
+<pre><code>apt-get install lvm2
+vgcreate vg0 /dev/sda7
+</code></pre>
 <p><code>dd if=/dev/zero of=ubuntufull.disk bs=1024k count=0 seek=10240</code></p>
-<p>Configure the mirrors.conf and xen-tools.conf files. yyy</p>
-<p><code>nano xl.conf</code></p>
+<p>Configure the mirrors.conf and xen-tools.conf files.</p>
+<p><em>nano xl.conf</em></p>
 <pre><code>vif.default.script="vif-openvswitch"
 vif.default.bridge="xenbr0"
 </code></pre>

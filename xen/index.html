@@ -205,8 +205,32 @@
 
 
   <li class="md-nav__item">
+    <a href="../Mkdocs/" title="Mkdocs" class="md-nav__link">
+      Mkdocs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../OvS/" title="OvS" class="md-nav__link">
       OvS
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../SSH/" title="SSH" class="md-nav__link">
+      SSH
     </a>
   </li>
 
@@ -355,19 +379,24 @@ xl dmesg | grep VMX
 <pre><code>apt-get install lvm2
 vgcreate vg0 /dev/sda7
 </code></pre>
-<p><code>dd if=/dev/zero of=ubuntufull.disk bs=1024k count=0 seek=10240</code></p>
-<p>Configure the mirrors.conf and xen-tools.conf files.</p>
-<p><em>nano xl.conf</em></p>
+<p>Configure the mirrors.conf and xen-tools.conf files as needed. </p>
+<p>If OvS is used then <em>nano xl.conf</em></p>
 <pre><code>vif.default.script="vif-openvswitch"
 vif.default.bridge="xenbr0"
 </code></pre>
-<p>Create PV DomU:</p>
-<p><code>xen-create-image --hostname=$guest --ip x.x.x.x --netmask x.x.x.x --gateway x.x.x.x --vcpus 2 --dist stretch</code></p>
-<p><code>xen-create-image --hostname=$guest --memory=2gb --vcpus=2 --lvm=vg0 --dhcp --pygrub --dist=stretch</code></p>
-<p><code>nano /etc/xen/$guest.cfg</code>
-    vif = [ 'bridge=virbr0', 'bridge=virbr1' ]
-<code>xl network-list &lt;hostname&gt;</code></p>
-<p>Create HVM DomU:</p>
+<p>Some xen commands:</p>
+<pre><code>xl list
+xl create /etc/xen/&lt;hostname&gt;.cfg
+xl console &lt;hostname&gt;
+xl restart &lt;hostname&gt;
+xen-delete-image VMs_name --lvm=vg01
+xl network-list &lt;hostname&gt;
+</code></pre>
+<p>Create PV DomU using xen-tools:</p>
+<pre><code>xen-create-image --hostname=$guest --ip x.x.x.x --netmask x.x.x.x --gateway x.x.x.x --vcpus 2 --dist stretch
+xen-create-image --hostname=$guest --memory=2gb --vcpus=2 --lvm=vg0 --dhcp --pygrub --dist=stretch
+</code></pre>
+<p>Create HVM DomU manually:</p>
 <p><code>lvcreate -n name -L 20G lvmgroup</code></p>
 <p><code>nano /etc/xen/web.cfg</code>                                                 </p>
 <pre><code>builder = "hvm"
@@ -381,11 +410,6 @@ vnc = 1
 #boot="c"
 boot="dc"
 </code></pre>
-<p><code>xl list</code></p>
-<p><code>xl create /etc/xen/&lt;hostname&gt;.cfg</code></p>
-<p><code>xl console &lt;hostname&gt;</code></p>
-<p><code>xl restart &lt;hostname&gt;</code></p>
-<p><code>xen-delete-image VMs_name --lvm=vg01</code></p>
 <h3 id="cold-migration">Cold Migration</h3>
 <p><code>xl save &lt;domain id&gt; &lt;savefile&gt;</code></p>
 <p><code>scp &lt;savefile&gt; &lt;target.domain.tld:/path/&gt;</code></p>
@@ -418,7 +442,7 @@ boot="dc"
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../OvS/" title="OvS" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../SSH/" title="SSH" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -427,7 +451,7 @@ boot="dc"
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                OvS
+                SSH
               </span>
             </div>
           </a>

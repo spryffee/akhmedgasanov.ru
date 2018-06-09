@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="http://akhmedgasanov.ru/Linux/">
+        <link rel="canonical" href="http://akhmedgasanov.ru/SSH/">
       
       
       
@@ -38,7 +38,7 @@
     
     
       
-        <title>Linux - Akhmed Gasanov docs</title>
+        <title>SSH - Akhmed Gasanov docs</title>
       
     
     
@@ -72,7 +72,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
     
-      <a href="#debian-9-stretch" tabindex="1" class="md-skip">
+      <a href="#ssh" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -98,7 +98,7 @@
                 Akhmed Gasanov docs
               </span>
               <span class="md-header-nav__topic">
-                Linux
+                SSH
               </span>
             
           
@@ -191,72 +191,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Linux
-      </label>
-    
-    <a href="./" title="Linux" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../Linux/" title="Linux" class="md-nav__link">
       Linux
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#debian-9-stretch" title="Debian 9 (stretch)" class="md-nav__link">
-    Debian 9 (stretch)
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#based-configuration" title="Based configuration" class="md-nav__link">
-    Based configuration
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#networking" title="Networking" class="md-nav__link">
-    Networking
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#troubleshooting" title="Troubleshooting" class="md-nav__link">
-    Troubleshooting
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -288,11 +227,45 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../SSH/" title="SSH" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        SSH
+      </label>
+    
+    <a href="./" title="SSH" class="md-nav__link md-nav__link--active">
       SSH
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ssh" title="SSH" class="md-nav__link">
+    SSH
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -327,36 +300,9 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#debian-9-stretch" title="Debian 9 (stretch)" class="md-nav__link">
-    Debian 9 (stretch)
+  <a href="#ssh" title="SSH" class="md-nav__link">
+    SSH
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#based-configuration" title="Based configuration" class="md-nav__link">
-    Based configuration
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#networking" title="Networking" class="md-nav__link">
-    Networking
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#troubleshooting" title="Troubleshooting" class="md-nav__link">
-    Troubleshooting
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -377,61 +323,11 @@
               
                 
                 
-                  <h1>Linux</h1>
+                  <h1>SSH</h1>
                 
-                <h2 id="debian-9-stretch">Debian 9 (stretch)</h2>
-<p><em>dd</em>  </p>
-<pre><code>sudo dd if=~/Загрузки/debian-9.3.0-amd64-netinst.iso of=/dev/sdb
-dd if=/dev/zero of=ubuntufull.disk bs=1024k count=0 seek=10240
-</code></pre>
-<p><em>sed</em></p>
-<p><code>sudo sed -i "/#.*/d" /etc/keystone/keystone.conf</code> удаляет все строки с решеткой</p>
-<p><code>sudo sed -i "/^$/d" /etc/keystone/keystone.conf</code> удаляет пустые строки</p>
-<h3 id="based-configuration">Based configuration</h3>
-<p>You can use <a href="https://debgen.simplylinux.ch">Debian Sources List Generator</a>. Modify the data in the /etc/apt/sources.list file by new data.</p>
-<pre><code>apt update &amp;&amp; apt upgrade
-apt install sudo net-tools
-adduser [username] sudo or visudo + `username   ALL=(ALL)   ALL
-apt search [package_name]
-dpkg-reconfigure tzdata
-</code></pre>
-<p>Set up command alias for some commands which are often used</p>
-<p><em>nano /etc/profile</em></p>
-<pre><code># add to the end
-alias ll='ls $LS_OPTIONS -l'
-alias l='ls $LS_OPTIONS -lA'
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
-</code></pre>
-<p>and apply by command <em>source /etc/profile</em></p>
-<h3 id="networking">Networking</h3>
-<pre><code>auto virbr0
-iface virbr0 inet static
-        address 10.10.0.1/24
-        bridge_ports eno1
-</code></pre>
-<p><code>apt install firmware-misc-nonfree</code> - wi-fi driver</p>
-<pre><code>auto wlo1
-iface wlo1 inet dhcp
-wpa-essid [ssid]
-wpa-psk [passwd]
-</code></pre>
-<p>Routes</p>
-<pre><code>route add -net 10.10.0.0/24 dev mgmt1
-route del -net 10.10.0.0/24 dev mgmt1
-</code></pre>
-<h3 id="troubleshooting">Troubleshooting</h3>
-<p>If you get GnuPG errors like:</p>
-<blockquote>
-<p>GPG error: [..] Release: The following signatures couldn’t be verified because the public key is not available: NO_PUBKEY [..]</p>
-</blockquote>
-<p><code>apt update 2&gt;&amp;1 | grep -o '[0-9A-Z]{16}$' | xargs</code> - try auto update</p>
-<p><code>egrep -v '^#|^$' /etc/apt/sources.list{,.d/*.list}</code> - try to find bad repo and do rm manually</p>
-<p><code>gpg --keyserver subkeys.pgp.net --recv KEY</code> 
-<code>gpg --export --armor KEY | sudo apt-key add</code> - or add the key manually</p>
-<p><code>/etc/apt/trusted.gpg</code> - or just removing</p>
-<p><code>fuser -vki /var/lib/dpkg/lock</code> - to fix error with /var/lib/apt/lists/lock - open </p>
+                <h3 id="ssh">SSH</h3>
+<p><code>ssh-keygen -t ecdsa</code> - key generation</p>
+<p><code>ssh -L PORT:localhost:PORT HOSTNAME</code> - ssh tunnel</p>
                 
                   
                 
@@ -452,7 +348,7 @@ route del -net 10.10.0.0/24 dev mgmt1
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../Firewall/" title="Firewall" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../OvS/" title="OvS" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -461,19 +357,19 @@ route del -net 10.10.0.0/24 dev mgmt1
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Firewall
+                OvS
               </span>
             </div>
           </a>
         
         
-          <a href="../Mkdocs/" title="Mkdocs" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../xen/" title="Xen" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Mkdocs
+                Xen
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

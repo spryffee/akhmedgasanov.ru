@@ -203,6 +203,18 @@
       
       
 
+
+  <li class="md-nav__item">
+    <a href="../Mkdocs/" title="Mkdocs" class="md-nav__link">
+      Mkdocs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
@@ -263,6 +275,18 @@
   
 </nav>
     
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../SSH/" title="SSH" class="md-nav__link">
+      SSH
+    </a>
   </li>
 
     
@@ -344,15 +368,16 @@
                   <h1>OvS</h1>
                 
                 <h3 id="basic-configuration">Basic configuration</h3>
-<p>Физический интерфейс, включаемый в ovs-sw0, не должен иметь IP-адреса или любых других настроек.</p>
-<p>Один коммутатор не должен иметь больше одного интерфейса по причине использования OvS свичем STP протокола.</p>
-<p>Использовать несколько физических интерфейсов можно только если они будут агрегированы.</p>
-<p><code>ovs-vsctl add-br ovs-sw0</code></p>
-<p><code>ovs-vsctl add-port ovs-sw0 eth0</code></p>
-<p><code>ovs-vsctl add-port ovs-sw0 mgmt0</code></p>
-<p><code>ovs-vsctl set interface mgmt0 type=internal</code></p>
-<p><code>ovs-vsctl show</code></p>
-<p>nano /etc/network/interfaces</p>
+<p>Физический интерфейс, включаемый в ovs-sw0, не должен иметь IP-адреса или любых других настроек.
+Один коммутатор не должен иметь больше одного интерфейса по причине использования OvS свичем STP протокола.
+Использовать несколько физических интерфейсов можно только если они будут агрегированы.</p>
+<pre><code>ovs-vsctl add-br ovs-sw0
+ovs-vsctl add-port ovs-sw0 eth0
+ovs-vsctl add-port ovs-sw0 mgmt0
+ovs-vsctl set interface mgmt0 type=internal
+ovs-vsctl show
+</code></pre>
+<p><em>nano /etc/network/interfaces</em></p>
 <pre><code>auto lo
 iface lo inet loopback
 
@@ -368,42 +393,39 @@ dns-nameservers 77.88.8.8
 allow-hotplug mgmt1
 iface mgmt1 inet static
 address 10.10.0.1/24
+
+
+ovs-vsctl list-br
+ovs-vsctl list-ports ovs-sw0
+ovs-vsctl del-port ovs-sw0 mgmt0
+ovs-vsctl del-br ovs-sw0
 </code></pre>
-<p><code>ovs-vsctl list-br</code></p>
-<p><code>ovs-vsctl list-ports ovs-sw0</code></p>
-<p><code>ovs-vsctl del-port ovs-sw0 mgmt0</code></p>
-<p><code>ovs-vsctl del-br ovs-sw0</code></p>
 <h3 id="vlan">VLAN</h3>
-<p><code>ovs-vsctl set port &lt;имя_порта&gt; tag=10</code></p>
-<p><code>ovs-vsctl add-br sw0-vlan10 ovs-sw0 10</code></p>
+<pre><code>ovs-vsctl set port &lt;имя_порта&gt; tag=10
+ovs-vsctl add-br sw0-vlan10 ovs-sw0 10
+</code></pre>
 <p>Разрешим порту eth0 пропускать во внешний мир трафик из определенных VLAN-ов:</p>
-<p>ovs-vsctl set port eth0 trunks=100,200,300</p>
-<p>Вместо команды set, могут также использоваться:</p>
-<pre><code>list &lt;таблица&gt; &lt;запись&gt;
-find &lt;таблица&gt; &lt;условие&gt;
-get &lt;таблица&gt; &lt;запись&gt; &lt;ключ=значение&gt;
-add &lt;таблица&gt; &lt;запись&gt; &lt;ключ=значение&gt;
-remove &lt;таблица&gt; &lt;запись&gt; &lt;ключ=значение&gt;
-clear &lt;таблица&gt; &lt;запись&gt; &lt;ключ
-create &lt;таблица&gt; &lt;запись&gt; &lt;ключ=значение&gt;
-destroy &lt;таблица&gt; &lt;запись&gt;
-wait-until &lt;таблица&gt; &lt;запись&gt; &lt;ключ=значение&gt;
+<pre><code>ovs-vsctl set port eth0 trunks=100,200,300
 </code></pre>
 <p>смотрим конфигурацию для конкретно интерфейса:</p>
-<p><code>ovs-vsctl list port eth0</code></p>
+<pre><code>ovs-vsctl list port eth0
+</code></pre>
 <p>Поиск по параметрам, например по vlan:</p>
-<p><code>ovs-vsctl find port tag=100</code></p>
+<pre><code>ovs-vsctl find port tag=100
+</code></pre>
 <h3 id="lacp">Агрегируем линки (LACP)</h3>
-<p><code>ovs-vsctl add-bond &lt;имя_коммутатора&gt; &lt;имя_нового_bonda&gt; &lt;список_физ.интерфейсов&gt;</code></p>
-<p><code>ovs-vsctl add-bond ovs-sw0 bond0 eth0 eth1</code></p>
-<p><code>ovs-vsctl set port bond0 lacp=active</code></p>
-<p><code>ovs-appctl lacp/show &lt;bond-интерфейс&gt;</code></p>
+<pre><code>ovs-vsctl add-bond &lt;имя_коммутатора&gt; &lt;имя_нового_bonda&gt; &lt;список_физ.интерфейсов&gt;
+ovs-vsctl add-bond ovs-sw0 bond0 eth0 eth1
+ovs-vsctl set port bond0 lacp=active
+ovs-appctl lacp/show &lt;bond-интерфейс&gt;
+</code></pre>
 <h3 id="mirroring">Mirroring</h3>
-<p><code>ovs-vsctl -- set Bridge xenbr1 mirrors=@m \
+<pre><code>ovs-vsctl -- set Bridge xenbr1 mirrors=@m \
 -- --id=@enp1s0 get Port enp1s0 \
 -- --id=@mirror1 get Port mirror1 \
 -- --id=@m create Mirror name=enp1s0-mirror select-dst-port=@enp1s0 \
-select-src-port=@enp1s0 output-port=@mirror1</code></p>
+select-src-port=@enp1s0 output-port=@mirror1
+</code></pre>
                 
                   
                 
@@ -424,7 +446,7 @@ select-src-port=@enp1s0 output-port=@mirror1</code></p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../Linux/" title="Linux" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../Mkdocs/" title="Mkdocs" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -433,19 +455,19 @@ select-src-port=@enp1s0 output-port=@mirror1</code></p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Linux
+                Mkdocs
               </span>
             </div>
           </a>
         
         
-          <a href="../xen/" title="Xen" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../SSH/" title="SSH" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Xen
+                SSH
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

@@ -77,8 +77,13 @@
         }, 
         {
             "location": "/iptables/", 
-            "text": "", 
+            "text": "hi", 
             "title": "Iptables"
+        }, 
+        {
+            "location": "/iptables/#hi", 
+            "text": "", 
+            "title": "hi"
         }, 
         {
             "location": "/xen/", 

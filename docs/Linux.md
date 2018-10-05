@@ -13,6 +13,14 @@ _sed_
 `sudo sed -i "/^$/d" /etc/keystone/keystone.conf` удаляет пустые строки
 
 
+Display opened ports
+
+`sudo netstat -ntulp`
+
+Display all connections
+
+`sudo lsof -i`
+
 ### Based configuration
 
 You can use [Debian Sources List Generator](https://debgen.simplylinux.ch). Modify the data in the /etc/apt/sources.list file by new data.

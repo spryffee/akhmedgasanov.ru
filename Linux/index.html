@@ -388,6 +388,10 @@ dd if=/dev/zero of=ubuntufull.disk bs=1024k count=0 seek=10240
 <p><em>sed</em></p>
 <p><code>sudo sed -i "/#.*/d" /etc/keystone/keystone.conf</code> удаляет все строки с решеткой</p>
 <p><code>sudo sed -i "/^$/d" /etc/keystone/keystone.conf</code> удаляет пустые строки</p>
+<p>Display opened ports</p>
+<p><code>sudo netstat -ntulp</code></p>
+<p>Display all connections</p>
+<p><code>sudo lsof -i</code></p>
 <h3 id="based-configuration">Based configuration</h3>
 <p>You can use <a href="https://debgen.simplylinux.ch">Debian Sources List Generator</a>. Modify the data in the /etc/apt/sources.list file by new data.</p>
 <pre><code>apt update &amp;&amp; apt upgrade
